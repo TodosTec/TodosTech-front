@@ -43,10 +43,7 @@ export function EditarPerfil({classe = '', aoClicarRetangulo, aoClicarCancelar})
                 cdescricao: descricao != '' ? descricao : promisse.data.cdescricao,
                 clinksite: 'null',
                 clinkfoto: 'null'
-            
             })
-            
-            
         })
         .catch((error) => {
             console.log(error)
@@ -58,7 +55,7 @@ export function EditarPerfil({classe = '', aoClicarRetangulo, aoClicarCancelar})
             data: {
                 ultimoUsuario
             }
-        })
+        })  
         // console.log(perfilNovo)
 
         setNome('')
