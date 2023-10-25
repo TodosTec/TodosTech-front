@@ -9,3 +9,4 @@ RUN npm i craco
 RUN npm i craco-less@2.1.0-alpha.0
 
 CMD ["npm", "start"]
+EXPOSE 3000
