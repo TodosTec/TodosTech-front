@@ -28,29 +28,38 @@ export function EditarPerfil({classe = '', aoClicarRetangulo, aoClicarCancelar})
             url: `https://api-3wfy.onrender.com/api/todostec/selecionar/username/${usernameAtomValue}`
         })
         .then((promisse) => {
-            // console.log(promisse.data)
-            setUltimoUsuario(promisse.data)
-
+            console.log(promisse.data)  
+            setUltimoUsuario({
+                ncdusuario: promisse.data.ncdusuario, 
+                cnome: nome != '' ? nome : promisse.data.cnome ,
+                cusername: username != '' ? username : promisse.data.cusername ,
+                csenha: promisse.data.csenha,
+                ctelefone: promisse.data.ctelefone,
+                cemail: promisse.data.cemail,
+                ncontaativa: promisse.data.ncontaativa,
+                ncdpronome: pronome != '' ? pronome : promisse.data.ncdpronome ,
+                ncdgenero: genero != '' ? genero : promisse.data.ncdgenero ,
+                ncdsexualidade: sexualidade != '' ? sexualidade : promisse.data.ncdsexualidade ,
+                cdescricao: descricao != '' ? descricao : promisse.data.cdescricao,
+                clinksite: 'null',
+                clinkfoto: 'null'
+            
+            })
+            
+            
         })
         .catch((error) => {
             console.log(error)
         })
-        var perfilNovo = {
-            nome: nome != '' ? nome : ultimoUsuario.cnome ,
-            username: username != '' ? username : ultimoUsuario.cusername ,
-            genero: genero != '' ? genero : ultimoUsuario.ncdgenero ,
-            sexualidade: sexualidade != '' ? sexualidade : ultimoUsuario.ncdsexualidade ,
-            pronome: pronome != '' ? pronome : ultimoUsuario.ncdpronome ,
-            descricao: descricao != '' ? descricao : ultimoUsuario.cdescricao
-        }
+        console.log(ultimoUsuario)
         axios({
-            method: "post",
-            url: "https://api-3wfy.onrender.com/api/todostec/atualizar/",
+            method: "put",
+            url: `https://api-3wfy.onrender.com/api/todostec/atualizar/${idAtomValue}`,
             data: {
-                perfilNovo
-            },
+                ultimoUsuario
+            }
         })
-        console.log(perfilNovo)
+        // console.log(perfilNovo)
 
         setNome('')
         setUsername('')
