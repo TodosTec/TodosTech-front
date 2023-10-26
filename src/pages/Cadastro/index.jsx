@@ -24,7 +24,7 @@
             e.preventDefault()
             axios({
                 method: "post",
-                url: "https://api-3wfy.onrender.com/api/todostec/selecionar/login",
+                url: "http://localhost:8080/api/todostec/selecionar/login",
                 data: {
                     cusername: nomeUsuario,
                     csenha: senha,

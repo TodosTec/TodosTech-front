@@ -6,6 +6,7 @@ import {Link, useNavigate} from 'react-router-dom'
 import {usernameAtom, idAtom} from '../../states'
 import { useAtom } from 'jotai'
 import axios from 'axios'
+import { SelectCampo } from '../../components/SelectCampo'
 export function EditarPerfil({classe = '', aoClicarRetangulo, aoClicarCancelar}){
     const [nome, setNome] = useState('')
     const [username, setUsername] = useState('')
@@ -25,7 +26,7 @@ export function EditarPerfil({classe = '', aoClicarRetangulo, aoClicarCancelar})
         console.log(idAtomValue)
         axios({
             method: "get",
-            url: `https://api-3wfy.onrender.com/api/todostec/selecionar/username/${usernameAtomValue}`
+            url: `http://localhost:8080/api/todostec/selecionar/username/${usernameAtomValue}`
         })
         .then((promisse) => {
             console.log(promisse.data)  
@@ -43,7 +44,6 @@ export function EditarPerfil({classe = '', aoClicarRetangulo, aoClicarCancelar})
                 cdescricao: descricao != '' ? descricao : promisse.data.cdescricao,
                 clinksite: 'null',
                 clinkfoto: 'null'
-            
             })
             
             
@@ -54,10 +54,19 @@ export function EditarPerfil({classe = '', aoClicarRetangulo, aoClicarCancelar})
         console.log(ultimoUsuario)
         axios({
             method: "put",
-            url: `https://api-3wfy.onrender.com/api/todostec/atualizar/${idAtomValue}`,
-            data: {
-                ultimoUsuario
+            url: `http://localhost:8080/api/todostec/atualizar/${idAtomValue}`,
+            data: ultimoUsuario
+        })
+        .then((response) => {
+            console.log(response.data);
+            if(response.data.includes("Usuario atualizado com sucesso.")){
+                // console.log('entrou')
+                navigate('/')
+                alert('Alterado com sucesso!')
             }
+        })
+        .catch((error) => {
+            console.log(error);
         })
         // console.log(perfilNovo)
 
@@ -109,7 +118,10 @@ export function EditarPerfil({classe = '', aoClicarRetangulo, aoClicarCancelar})
                     tipo='text'
                     
                     />
-                    <EditCampo valor={genero} 
+                    <SelectCampo/>
+                        
+                    {/* </EditCampo> */}
+                    {/* <EditCampo valor={genero} 
                     setValor={setGenero} 
                     texto='Gênero' 
                     tipo='text'
@@ -126,7 +138,7 @@ export function EditarPerfil({classe = '', aoClicarRetangulo, aoClicarCancelar})
                     texto='Pronome' 
                     tipo='text'
                     
-                    />
+                    /> */}
                     <EditCampo valor={descricao} 
                     setValor={setDescricao} 
                     texto='Descrição' 
