@@ -9,15 +9,16 @@
         border-radius: 20px 20px 0px 0px;
         display: flex;
         flex-direction: column;
-        justify-content: space-between;
+        // justify-content: space-between;
         // align-items: center;
-        .top{
-            display: flex;
-            flex-direction: column;
-            width: 100%;
-            align-items: center;
-            padding: 10px 20px 0px 20px;
-            gap: 30px;
+            .inputs{
+                display: flex;
+                flex-direction: column;
+                width: 100%;
+                align-items: center;
+                padding: 10px 20px 0px 20px;
+                gap: 30px;
+            }
             .retangulo{
                 width: 15px;
                 height: 3px;
@@ -39,10 +40,11 @@
                 flex-direction: column;
                 gap: 40px;
                 width: 100%;
+                flex-grow: 1;
+                justify-content: space-between;
                 >div{
                     min-width: 100%;
                 }
-            }
         }
         .buttons{
             display: flex;
