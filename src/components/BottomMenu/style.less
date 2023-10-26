@@ -1,0 +1,32 @@
+.BottomMenu{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background-color: white;
+    min-width: 100%;
+    align-items: center;
+    padding-top: 12px;
+    padding-bottom: 45px;
+    gap: 35px;
+    transition: ease .5s;
+    position: fixed;
+    bottom: 0;
+    z-index: 2;
+    .itens{
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        width: 100%;
+        padding: 0px 20px;
+    }
+    .retangulo{
+        width: 15px;
+        height: 3px;
+        background-color: lightgray;
+        border-radius: 100;
+    }
+}
+.mostrar{
+    bottom: -430px;    
+    z-index: 0;
+}
