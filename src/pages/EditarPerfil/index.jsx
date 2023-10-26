@@ -45,8 +45,6 @@ export function EditarPerfil({classe = '', aoClicarRetangulo, aoClicarCancelar})
                 clinksite: 'null',
                 clinkfoto: 'null'
             })
-            
-            
         })
         .catch((error) => {
             console.log(error)
@@ -64,9 +62,6 @@ export function EditarPerfil({classe = '', aoClicarRetangulo, aoClicarCancelar})
                 navigate('/')
                 alert('Alterado com sucesso!')
             }
-        })
-        .catch((error) => {
-            console.log(error);
         })
         // console.log(perfilNovo)
 
