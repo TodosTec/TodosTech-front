@@ -24,6 +24,7 @@ export function EditarPerfil({classe = '', aoClicarRetangulo, aoClicarCancelar})
         
         console.log(usernameAtomValue)
         console.log(idAtomValue)
+
         axios({
             method: "get",
             url: `http://localhost:8080/api/todostec/selecionar/username/${usernameAtomValue}`
@@ -59,9 +60,13 @@ export function EditarPerfil({classe = '', aoClicarRetangulo, aoClicarCancelar})
             console.log(response.data);
             if(response.data.includes("Usuario atualizado com sucesso.")){
                 // console.log('entrou')
+                setUsernameAtomValue(ultimoUsuario.cusername)
                 navigate('/')
                 alert('Alterado com sucesso!')
             }
+        })
+        .catch((error) => {
+            console.log(error);
         })
         // console.log(perfilNovo)
 
@@ -113,7 +118,41 @@ export function EditarPerfil({classe = '', aoClicarRetangulo, aoClicarCancelar})
                     tipo='text'
                     
                     />
-                    <SelectCampo/>
+                    <SelectCampo 
+                        texto='Pronome' 
+                        opt1= 'Masculino' 
+                        opt2='Feminino' 
+                        opt3='Neutro' 
+                        opt4='Outro'
+                        valor={pronome}
+                        setValor={setPronome}
+                        // onChange={(e) => {setPronome(e.target.value)}}
+
+                    />
+                    <SelectCampo 
+                        texto='Gênero' 
+                        opt1= 'Masculino' 
+                        opt2='Feminino' 
+                        opt3='Não binário' 
+                        opt4='Outro'
+                        valor={genero}
+                        setValor={setGenero}
+                        // onChange={(e) => {setGenero(e.target.value)}}
+
+                    />
+                    <SelectCampo 
+                        texto='Sexualidade' 
+                        opt1= 'Heterossexual' 
+                        opt2='Homossexual' 
+                        opt3='Bissexual' 
+                        opt4='Panssexual' 
+                        opt5='Assexual' 
+                        opt6='Outro'
+                        valor={sexualidade}
+                        setValor={setSexualidade}
+                        // onChange={(e) => {setSexualidade(e.target.value)}}
+
+                    />
                         
                     {/* </EditCampo> */}
                     {/* <EditCampo valor={genero} 

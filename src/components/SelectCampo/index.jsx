@@ -1,55 +1,47 @@
-import './style.less'
+import './style.less';
 import { useState } from 'react';
 
-export function SelectCampo({ tipo = '', texto = 'Nome', placeholder = texto, setValor, valor, requiredInput = false}){
-    const [placeholderEstado, setPlaceholderEstado] = useState(false);
-    const [placeholderValor, setPlaceholderValor] = useState(placeholder);
-    const handleInputFocus = () => {
-      setPlaceholderEstado(true);
-      setPlaceholderValor('');
-    };
-    
-    const handleInputBlur = () => {
-      
-      if (valor === '') {
-          console.log('entrou')
-          setPlaceholderValor(texto);
-          setPlaceholderEstado(false);
-      } else{
-          setPlaceholderEstado(true);
+export function SelectCampo({ opt1 = '', opt2 = '', opt3 = '', opt4 = '', opt5 = '', opt6 = '', texto = '', valor, setValor }) {
+    const [controle, setControle] = useState(true)
+    const [controleTexto, setControleTexto] = useState(true)
+    function controleOpt(event) {
+    // console.log(event.target.value);
+    if(event.target.value == texto){
+        setControle(false)
+    }
+    else if(event.target.value == ''){
+        setControle(true)
+        setControleTexto(true)
+        // alert('Selecione uma opção válida')
+    } else{
+        setControleTexto(false)
+    }
+    // if (event.target.value === texto) {
+    //   console.log('entrou');
+    // }
+  }
+
+  return (
+    <div className="SelectCampo">
+      {
+        controleTexto ? ('') : (<p>{texto}</p>)
       }
-    };
-    return(
-        <div className="SelectCampo">
-            {placeholderEstado ? <p tabIndex={0}>{texto}</p> : null}
-            <select name="" id="">
-                <option value=""></option>
-                <option value="">opt 1</option>
-                <option value="">opt 2</option>
-                <option value="">opt 3</option>
-            </select>
-        </div>
-    )
+      <select name="" id="" onClick={controleOpt}>
+        {controle ? (<option value={texto}>{texto}</option>) : (
+        <option value=''></option>)}
+        <option value="1" onClick={(event) => {setValor(event.target.value);}}>{opt1}</option>
+        <option value="2" onClick={(event) => {setValor(event.target.value);}}>{opt2}</option>
+        <option value="3" onClick={(event) => {setValor(event.target.value);}}>{opt3}</option>
+        {opt4 == '' ? (
+            ''
+        ) : (<option value="4">{opt4}</option>)}
+        {opt5 == '' ? (
+            ''
+        ) : (<option value="5">{opt5}</option>)}
+        {opt6 == '' ? (
+            ''
+        ) : (<option value="6">{opt6}</option>)}
+      </select>
+    </div>
+  );
 }
-
-
-
-
-
-// export function EditCampo({ tipo = '', texto = 'Nome', placeholder = texto, setValor, valor, requiredInput = false}) {
-
-//   return (
-//     <div className="EditCampo">
-//       <input
-//         tabIndex={0}
-//         type={tipo}
-//         placeholder={placeholderValor}
-//         onFocus={handleInputFocus}
-//         onBlur={handleInputBlur}
-//         onChange={(e) => {setValor(e.target.value)}}
-//         value={valor}
-//         required = {requiredInput ? true : false}
-//       />
-//     </div>
-//   );
-// }
