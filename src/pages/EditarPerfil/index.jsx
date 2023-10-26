@@ -14,6 +14,7 @@ export function EditarPerfil({classe = '', aoClicarRetangulo, aoClicarCancelar})
     const [sexualidade, setSexualidade] = useState('')
     const [pronome, setPronome] = useState('')
     const [descricao, setDescricao] = useState('')
+    const [nenhumCampoAlterado, setNenhumCampoAlterado] = useState(false)
     const [usernameAtomValue, setUsernameAtomValue] = useAtom(usernameAtom)
     const [idAtomValue, setIdAtomValue] = useAtom(idAtom)
     const [ultimoUsuario, setUltimoUsuario] = useState({})
@@ -21,36 +22,39 @@ export function EditarPerfil({classe = '', aoClicarRetangulo, aoClicarCancelar})
 
     function alterarPerfil(e){
         e.preventDefault()
-        
-        console.log(usernameAtomValue)
-        console.log(idAtomValue)
-
-        axios({
-            method: "get",
-            url: `http://localhost:8080/api/todostec/selecionar/username/${usernameAtomValue}`
-        })
-        .then((promisse) => {
-            console.log(promisse.data)  
-            setUltimoUsuario({
-                ncdusuario: promisse.data.ncdusuario, 
-                cnome: nome != '' ? nome : promisse.data.cnome ,
-                cusername: username != '' ? username : promisse.data.cusername ,
-                csenha: promisse.data.csenha,
-                ctelefone: promisse.data.ctelefone,
-                cemail: promisse.data.cemail,
-                ncontaativa: promisse.data.ncontaativa,
-                ncdpronome: pronome != '' ? pronome : promisse.data.ncdpronome ,
-                ncdgenero: genero != '' ? genero : promisse.data.ncdgenero ,
-                ncdsexualidade: sexualidade != '' ? sexualidade : promisse.data.ncdsexualidade ,
-                cdescricao: descricao != '' ? descricao : promisse.data.cdescricao,
-                clinksite: 'null',
-                clinkfoto: 'null'
+        if(nome == '' &&  username == '' && pronome == '' && sexualidade == '' && descricao == ''){
+            setNenhumCampoAlterado(true)
+        } else{
+            setNenhumCampoAlterado(false)
+            axios({
+                method: "get",
+                url: `http://localhost:8080/api/todostec/selecionar/username/${usernameAtomValue}`
             })
-        })
-        .catch((error) => {
-            console.log(error)
-        })
-        console.log(ultimoUsuario)
+            .then((promisse) => {
+                console.log(promisse.data)  
+                setUltimoUsuario({
+                    ncdusuario: promisse.data.ncdusuario, 
+                    cnome: nome != '' ? nome : promisse.data.cnome ,
+                    cusername: username != '' ? username : promisse.data.cusername ,
+                    csenha: promisse.data.csenha,
+                    ctelefone: promisse.data.ctelefone,
+                    cemail: promisse.data.cemail,
+                    ncontaativa: promisse.data.ncontaativa,
+                    ncdpronome: pronome != '' ? pronome : promisse.data.ncdpronome ,
+                    ncdgenero: genero != '' ? genero : promisse.data.ncdgenero ,
+                    ncdsexualidade: sexualidade != '' ? sexualidade : promisse.data.ncdsexualidade ,
+                    cdescricao: descricao != '' ? descricao : promisse.data.cdescricao,
+                    clinksite: 'null',
+                    clinkfoto: 'null'
+                })
+            })
+            .catch((error) => {
+                console.log(error)
+            })
+        }
+
+    }
+    useEffect(() => {
         axios({
             method: "put",
             url: `http://localhost:8080/api/todostec/atualizar/${idAtomValue}`,
@@ -60,9 +64,9 @@ export function EditarPerfil({classe = '', aoClicarRetangulo, aoClicarCancelar})
             console.log(response.data);
             if(response.data.includes("Usuario atualizado com sucesso.")){
                 // console.log('entrou')
-                setUsernameAtomValue(ultimoUsuario.cusername)
-                navigate('/')
-                alert('Alterado com sucesso!')
+                // setUsernameAtomValue(ultimoUsuario.cusername)
+                navigate('/login')
+                alert('Faça login para prosseguir.')
             }
         })
         .catch((error) => {
@@ -77,7 +81,7 @@ export function EditarPerfil({classe = '', aoClicarRetangulo, aoClicarCancelar})
         setPronome('')
         setDescricao('')
 
-    }
+    }, [ultimoUsuario])
 
     useEffect(() => {
         if(localStorage.getItem('status') === 'deslogado'){
@@ -109,7 +113,7 @@ export function EditarPerfil({classe = '', aoClicarRetangulo, aoClicarCancelar})
                     setValor={setNome} 
                     texto='Nome' 
                     tipo='text'
-                    requiredInput = {true}
+                    // requiredInput = {true}
                     
                     />
                     <EditCampo valor={username} 
@@ -179,6 +183,8 @@ export function EditarPerfil({classe = '', aoClicarRetangulo, aoClicarCancelar})
                     tipo='text'
                     
                     />
+
+                    <p className={nenhumCampoAlterado ? '' : 'sumido'}>Altere algum campo, ou cancele.</p>
                     <div className="buttons">
                         <ButtonOutline text='Definir' tipo='submit'/>
                         <Link to='/perfil'>
