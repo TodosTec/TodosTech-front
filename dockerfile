@@ -5,15 +5,11 @@ WORKDIR /app
 COPY . /app
 
 RUN npm install
-
-<<<<<<< HEAD
-RUN npm run build
+RUN npm i craco
+RUN npm i craco-less@2.1.0-alpha.0
+RUN npm i react-ionicons
+RUN npm i styled-components
 
 EXPOSE 3000
 
-CMD ["npm", "start"]
-=======
-EXPOSE 3000
-
-CMD ["npm", "start"]
->>>>>>> 9fcc9e10b4f894571f2e4795d498013fa4c23f0d
+ENTRYPOINT ["npm", "start"]
