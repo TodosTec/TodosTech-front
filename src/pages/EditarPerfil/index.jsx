@@ -20,13 +20,13 @@ export function EditarPerfil({classe = '', aoClicarRetangulo, aoClicarCancelar})
     const [ultimoUsuario, setUltimoUsuario] = useState({})
     const navigate = useNavigate()
 
-    function alterarPerfil(e){
+    async function alterarPerfil(e){
         e.preventDefault()
         if(nome == '' &&  username == '' && pronome == '' && sexualidade == '' && descricao == ''){
             setNenhumCampoAlterado(true)
         } else{
             setNenhumCampoAlterado(false)
-            axios({
+            await axios({
                 method: "get",
                 url: `http://localhost:8080/api/todostec/selecionar/username/${usernameAtomValue}`
             })
@@ -54,7 +54,7 @@ export function EditarPerfil({classe = '', aoClicarRetangulo, aoClicarCancelar})
         }
 
     }
-    useEffect(() => {
+    function alterarPerfilReq(){
         axios({
             method: "put",
             url: `http://localhost:8080/api/todostec/atualizar/${idAtomValue}`,
@@ -66,7 +66,7 @@ export function EditarPerfil({classe = '', aoClicarRetangulo, aoClicarCancelar})
                 // console.log('entrou')
                 // setUsernameAtomValue(ultimoUsuario.cusername)
                 navigate('/login')
-                alert('Faça login para prosseguir.')
+                alert('Faça login para concluir.')
             }
         })
         .catch((error) => {
@@ -80,7 +80,9 @@ export function EditarPerfil({classe = '', aoClicarRetangulo, aoClicarCancelar})
         setSexualidade('')
         setPronome('')
         setDescricao('')
-
+    }
+    useEffect(() => {
+        alterarPerfilReq()
     }, [ultimoUsuario])
 
     useEffect(() => {

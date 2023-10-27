@@ -79,7 +79,7 @@
                             Senha
                             <InputDefault typeInput='password' valor={senha} setValor={setSenha} />
                         </label>
-                        <TextCaseCadastro text='senhaIncorreta' estado={senhaIncorreta} classe='erros' />
+                        <TextCaseCadastro text='senha Incorreta' estado={senhaIncorreta} classe='erros' />
                         <Link className='esqueciSenha' to='/esqueciSenha'>Esqueci minha senha</Link>
                     </div>
                     <ButtonBigBlue type="submit" />

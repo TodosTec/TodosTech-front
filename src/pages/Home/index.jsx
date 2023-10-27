@@ -6,6 +6,7 @@ import { PostEmpresa } from '../../components/PostEmpresa'
 import { CircleFlutuamteButton } from '../../components/CircleFlutuanteButton'
 import { useNavigate } from 'react-router-dom'
 import { useEffect } from 'react'
+import axios  from 'axios'
 export function Home(){
     const navigate = useNavigate()
     useEffect(() => {
@@ -17,6 +18,19 @@ export function Home(){
             navigate('/login')
         }
 }, [])
+    async function getPosts(){
+        await axios({
+            method: "get",
+            url: "http://localhost:8080/api/todostec/post/selecionar/random",
+        })
+        .then((promisse) => {
+            console.log(promisse);
+        })
+        .catch((error) => {
+            console.log(error);
+        })
+    }
+
     return(
         <div className="Home">
             <img src={logo} alt="" />
@@ -40,7 +54,9 @@ export function Home(){
             </div>
             <div className="bottomItens">
                 <CircleFlutuamteButton aoClicar={() => {
-                    navigate('/fazerPost')
+                    // navigate('/fazerPost')
+                    getPosts()
+
                 }}/>
                 <NavBarFooter classe={1} 
                         aoClicar5={() => {navigate('/Perfil')}}

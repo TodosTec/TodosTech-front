@@ -1,7 +1,7 @@
 import './style.less';
 import { useState } from 'react';
 
-export function EditCampo({ tipo = '', texto = 'Nome', placeholder = texto, setValor, valor, requiredInput = false}) {
+export function EditCampo({ tipo = '', texto = 'Nome', placeholder = texto, setValor, valor, requiredInput = false, minimoLetra = '0'}) {
   const [placeholderEstado, setPlaceholderEstado] = useState(false);
   const [placeholderValor, setPlaceholderValor] = useState(placeholder);
   const handleInputFocus = () => {
@@ -32,6 +32,7 @@ export function EditCampo({ tipo = '', texto = 'Nome', placeholder = texto, setV
         onChange={(e) => {setValor(e.target.value)}}
         value={valor}
         required = {requiredInput ? true : false}
+        minLength={minimoLetra}
       />
     </div>
   );
