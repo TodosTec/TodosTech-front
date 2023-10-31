@@ -5,72 +5,94 @@ import logo from '../../assets/logo.svg'
 import { NoticiaComponente } from '../../components/NoticiaComponente'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
-import { useState } from 'react'
-
-export function Noticia(){
+import { useEffect, useState } from 'react'
+import { urlNoticiaAtom } from '../../states'
+import { useAtom } from 'jotai'
+export function Noticia() {
     const navigate = useNavigate()
     const apiKey = '247551d41b16459681a804c7ec3271ac'
     const [arrayNoticias, setArrayNoticias] = useState([])
-    function getNoticias(pageSize){
-        let tema = ['lgbt', 'gay', 'lesbian', 'bisexual', 'transgender']
-        let count = 0
-        let controle = 5
-        let arrayNoticiasControle = []
-        for (let i = 0; i < controle; i++) {            
+    const [backgroundImageTop, setBackgroundImageTop] = useState('');
+    const [urlNoticiaAtomValue, setUrlNoticiaAtomValue] = useAtom(urlNoticiaAtom)
+    function getNoticias() {
+        let temas = ['lgbt', 'gay', 'lesbian', 'bisexual', 'transgender']
+        let valorPageSize = 20
+        for (let i = 0; i < temas.length; i++) {
             axios({
                 method: "get",
                 url: "https://newsapi.org/v2/everything",
                 params: {
-                    q: tema[i],
+                    q: temas[i],
                     apiKey: apiKey,
                     to: new Date().toISOString().slice(0, 10),
                     from: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000).toISOString().slice(0, 10),
                     sortBy: 'popularity',
                     coutry: 'br',
-                    pageSize: 20,
+                    pageSize: valorPageSize,
                     language: 'pt'
                 }
             })
-            .then((promisse) => {
-                console.log(promisse.data.articles);
-                count += promisse.data.articles.length
-                console.log('loop' ,i + 1, 'count', count);
-                for (let j = 0; j < promisse.data.articles.length; j++){
-                    // console.log(promisse.data.articles[j]);
-                    arrayNoticiasControle.push(promisse.data.articles[j])
-                }
-                console.log(pageSize);
-                if(count >= pageSize){
-                    console.log('entrou')
-                    controle = 10
-                };
-                // console.log(promisse.data.articles);
-            })
-            .catch((error) => {
-                console.log(error);
-            })
+                .then((response) => {
+                    // console.log(response.data.articles);
+                    for (let j = 0; j < response.data.articles.length; j++) {
+                        // console.log(response.data.articles[j]);
+                        arrayNoticias.push(response.data.articles[j])
+                    }
+                    // console.log(arrayNoticias);
+                    if (arrayNoticias.length >= 20) {
+                        i = 6
+                        for (let i = 0; i < arrayNoticias.length; i++) {
+                            if (arrayNoticias[i].urlToImage) {
+                                setBackgroundImageTop(arrayNoticias[i].urlToImage);
+                                break; // Sai do loop quando encontra a primeira imagem de URL válida
+                            }
+                        }
+                        // console.log(arrayNoticias.splice(20))
+                        // console.log(arrayNoticias[20]);
+                        // console.log(arrayNoticias.length - 20);
+
+                    }
+                    else {
+                        valorPageSize -= response.data.length
+                    }
+                })
+                .catch((error) => {
+                    console.log(error);
+                })
         }
-        console.log(arrayNoticiasControle);
-        setArrayNoticias(arrayNoticiasControle);
     }
+    useEffect(() => {
+        getNoticias()
+    }, [])
     return (
         <div className="Noticia">
             <img src={logo} alt="" />
             <div className="container">
-                <div className="top">
+                <div className="top" style={{ backgroundImage: `url(${backgroundImageTop})` }}>
                     <h1 className="titulo">Lorem, ipsum dolor.</h1>
                     <p>Lorem Ipsum Dolor</p>
                 </div>
                 <div className="noticiasDesc">
-                    <NoticiaComponente aoClicar={() => {navigate('/noticiawebview')}}/>
-                    <NoticiaComponente aoClicar={() => {getNoticias(20)}}/>
-                    <NoticiaComponente/>
-                    <NoticiaComponente/>
-                    <NoticiaComponente/>
-                    <NoticiaComponente/>
-                    <NoticiaComponente/>
-                    <NoticiaComponente/>
-                    <NoticiaComponente/>
+                    {arrayNoticias.map((noticia, index) => (
+                        <NoticiaComponente key={index}
+                            autor={noticia.author}
+                            titulo={noticia.title}
+                            data={new Date(noticia.publishedAt).toLocaleDateString('pt-BR')}
+                            aoClicar={() => {
+                                setUrlNoticiaAtomValue(noticia.url);
+                                const iframe = document.createElement('iframe');
+                                iframe.style.display = 'none';
+                                iframe.onload = () => {
+                                  navigate('/noticiaWebView');
+                                };
+                                iframe.onerror = () => {
+                                  console.log('Não funcionou');
+                                };
+                                document.body.appendChild(iframe);
+                                iframe.src = noticia.url;
+                              }}
+                        />
+                    ))}
                 </div>
             </div>
             <NavBarFooter

@@ -10,6 +10,7 @@ import { FazerPost } from './pages/FazerPost';
 import { Noticia } from './pages/Noticia';
 import { NoticiaWebView } from './pages/NoticiaWebView';
 import { RedefinirSenha } from './pages/RedefinirSenha';
+import { NoticiaError } from './pages/NoticiaError';
 // import About from './components/About';
 // import Contact from './components/Contact';
 
@@ -28,6 +29,7 @@ export function Rotas() {
           <Route path="/noticia" element={<Noticia/>} />
           <Route path="/noticiaWebView" element={<NoticiaWebView/>} />
           <Route path="/redefinirsenha" element={<RedefinirSenha/>} />
+          <Route path="/noticiaError" element={<NoticiaError/> }/>
           
       </Routes>
     </BrowserRouter>

@@ -3,23 +3,13 @@ import './style.less'
 import { useAtom } from 'jotai'
 import { urlNoticiaAtom } from '../../states'
 import { useNavigate } from 'react-router-dom'
-export function NoticiaWebView() {
+export function NoticiaError() {
     const [urlNoticiaAtomValue, setUrlNoticiaAtomValue] = useAtom(urlNoticiaAtom)
     const navigate = useNavigate()
-    // window.addEventListener('message', function(event) {
-    //     console.log(event.origin);
-    //   });
-      
     return (
         <div className="NoticiaWebView">
             <div className="container">
-                <iframe
-                    src={urlNoticiaAtomValue}
-                    title="Noticia"
-                    // width="100%"
-                    // height="600px"
-                />
-                <p></p>
+                <p>nkajfdjsnsljk</p>
             </div>
             <NavBarFooter 
                 classe={2}
