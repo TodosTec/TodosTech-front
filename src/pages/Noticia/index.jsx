@@ -80,16 +80,7 @@ export function Noticia() {
                             data={new Date(noticia.publishedAt).toLocaleDateString('pt-BR')}
                             aoClicar={() => {
                                 setUrlNoticiaAtomValue(noticia.url);
-                                const iframe = document.createElement('iframe');
-                                iframe.style.display = 'none';
-                                iframe.onload = () => {
-                                  navigate('/noticiaWebView');
-                                };
-                                iframe.onerror = () => {
-                                  console.log('Não funcionou');
-                                };
-                                document.body.appendChild(iframe);
-                                iframe.src = noticia.url;
+                                navigate('/noticiaWebView');
                               }}
                         />
                     ))}
