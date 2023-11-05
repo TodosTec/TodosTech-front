@@ -61,6 +61,9 @@
                         display: flex;
                         justify-content: center;
                         gap: 5px;
+                        .campo{
+                            color: red;
+                        }
                     }
                 }
                 .foto {
@@ -86,6 +89,22 @@
                 min-width: 100%;
                 max-height: 100vh; /* Defina uma altura máxima igual à altura da tela */
                 overflow: auto; /* Adicione a propriedade overflow para permitir a rolagem quando necessário */
+                flex-grow: 1;
+                >div{
+                    .conteudo{
+                        .textosPost{
+                            display: flex;
+                            gap: 0px;
+                            // flex-direction: row;
+                            .info{
+                                padding: 0px;
+                                align-items:start;
+                                gap: 10px;
+
+                            }
+                        }
+                    }
+                }
             }
             
         }

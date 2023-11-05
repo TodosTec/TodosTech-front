@@ -5,20 +5,115 @@ import { NavBarFooter } from '../../components/NavBarFooter'
 import { SettingsOutline } from 'react-ionicons'
 import { EditarPerfil } from '../../pages/EditarPerfil'
 import { useNavigate } from 'react-router-dom';
-import {Post} from '../../components/Post'
+import { Post } from '../../components/Post'
+import { usernameAtom } from '../../states';
+import { useAtom } from 'jotai';
+import axios from 'axios';
 export function Perfil() {
     const navigate = useNavigate()
     const [showConfig, setShowConfig] = useState(true)
     const [tooglePrincipalComponent, setTooglePrincipalComponent] = useState(false)
+    const [usernameAtomValue, setUsernameAtomValue] = useAtom(usernameAtom)
+    const [userObject, setUserObject] = useState({})
+    const [arrayPosts, setArrayPosts] = useState([])
+    function getUserAllPosts() {
+        axios({
+            method: "get",
+            url: `http://localhost:8080/api/todostec/post/selecionar/${usernameAtomValue}`,
+        })
+        .then((promise) => {
+            setArrayPosts(promise.data);
+        })
+        .catch((error) => {
+            console.log(error);
+        });
+    }
+    function getUser() {
+        axios({
+            method: "get",
+            url: `http://localhost:8080/api/todostec/selecionar/username/${usernameAtomValue}`,
+        })
+        .then((promise) => {
+            setUserObject(promise.data);
+            let updatedNcdpronome = '';
+            switch (promise.data.ncdpronome) {
+                case 1:
+                    updatedNcdpronome = 'Masculino';
+                    break;
+                case 2:
+                    updatedNcdpronome = 'Feminino';
+                    break;
+                case 3:
+                    updatedNcdpronome = 'Neutro';
+                    break;
+                case 4:
+                    updatedNcdpronome = 'Não Binário';
+                    break;
+                default:
+                    updatedNcdpronome = 'Outro';
+            }
+            setUserObject((prev) => ({ ...prev, ncdpronome: updatedNcdpronome }));
+    
+            let updatedNcdgenero = '';
+            switch (promise.data.ncdgenero) {
+                case 1:
+                    updatedNcdgenero = 'Masculino';
+                    break;
+                case 2:
+                    updatedNcdgenero = 'Feminino';
+                    break;
+                case 3:
+                    updatedNcdgenero = 'Não Binário';
+                    break;
+                case 4:
+                    updatedNcdgenero = 'Outro';
+                    break;
+                default:
+                    updatedNcdgenero = 'Outro';
+            }
+            setUserObject((prev) => ({ ...prev, ncdgenero: updatedNcdgenero }));
+    
+            let updatedNcdsexualidade = '';
+            switch (promise.data.ncdsexualidade) {
+                case 1:
+                    updatedNcdsexualidade = 'Heterossexual';
+                    break;
+                case 2:
+                    updatedNcdsexualidade = 'Homossexual';
+                    break;
+                case 3:
+                    updatedNcdsexualidade = 'Bissexual';
+                    break;
+                case 4:
+                    updatedNcdsexualidade = 'Panssexual';
+                    break;
+                case 5:
+                    updatedNcdsexualidade = 'Assexual';
+                    break;
+                case 6:
+                    updatedNcdsexualidade = 'Outro';
+                    break;
+                default:
+                    updatedNcdsexualidade = 'Outro';
+            }
+            setUserObject((prev) => ({ ...prev, ncdsexualidade: updatedNcdsexualidade }));
+        })
+        .catch((error) => {
+            console.log(error);
+        });
+    }
+    
     useEffect(() => {
-        if(localStorage.getItem('status') === 'deslogado'){
+        getUserAllPosts()
+        getUser()
+        if (localStorage.getItem('status') === 'deslogado') {
             navigate('/login')
-        } else if(localStorage.getItem('status') === 'logado'){
+        } else if (localStorage.getItem('status') === 'logado') {
 
-        } else{
+        } else {
             navigate('/login')
         }
-}, [])
+    }, [])
     return (
         <div className='conserto'>
             <div className={tooglePrincipalComponent ? 'Perfil zindex' : 'Perfil'}>
@@ -30,54 +125,57 @@ export function Perfil() {
                 <div className="container">
                     <div className="info">
                         <div className="foto"></div>
-                        <h1>Tom Hiddleston</h1>
+                        <h1>{userObject.cnome}</h1>
                         <div className="textos">
-                            <p className="username">@TomHiddleston</p>
-                            <p>Meu nome é Tom Hiddleston, me descobri dentro da comunidade como há mais de 10 anos, atualmente busco ajudar pessoas no processo de aceitação.</p>
+                            <p className="username">@{userObject.cusername}</p>
+                            <p>{userObject.cdescricao}</p>
                             <div className='complementos'>
-                                <span>Masculino</span>
+                                <span><span className="campo">Pron:</span> {userObject.ncdpronome}</span>
                                 <span> · </span>
-                                <span>Bissexual</span>
+                                <span><span className="campo">Gên:</span> {userObject.ncdgenero}</span>
                                 <span> · </span>
-                                <span>Assexual</span>
+                                <span><span className="campo">Sex:</span> {userObject.ncdsexualidade}</span>
                             </div>
                         </div>
                     </div>
-                        <div className="posts-container">
-                            <Post/>
-                            <Post/>
-                            <Post/>
-                            <Post/>
-                            <Post/>
-                            <Post/>
-                            <Post/>
-                            <Post/>
-                        </div>
+                    <div className="posts-container">
+                        {arrayPosts.map((post, index) => (
+                            <Post
+                                key={index}
+                                nome={post.usuario.cnome}
+                                text={post.ctexto}
+                                username={post.usuario.cusername}
+                                aoClicar={() => {
+
+                                }}
+                            />
+                        ))}
+                    </div>
                     <BottomMenu classe={showConfig ? 'mostrar' : ''} aoClicarRetangulo={() => {
                         setShowConfig(true)
                     }}
-                    aoClicarOpt1={() => {
-                        setTooglePrincipalComponent(true)
-                    }}
-                    aoClicarSair={() => {
-                        navigate('/login')
-                        localStorage.setItem('status', 'deslogado')
-                    }}
-                    aoClicarOpt2={() => {
-                        navigate('/redefinirsenha')
-                    }}
-                    
+                        aoClicarOpt1={() => {
+                            setTooglePrincipalComponent(true)
+                        }}
+                        aoClicarSair={() => {
+                            navigate('/login')
+                            localStorage.setItem('status', 'deslogado')
+                        }}
+                        aoClicarOpt2={() => {
+                            navigate('/redefinirsenha')
+                        }}
+
                     />
-                    <NavBarFooter classe={5} 
-                        aoClicar4={() => {navigate('/chat')}}
-                        aoClicar1={() => {navigate('/')}}
+                    <NavBarFooter classe={5}
+                        aoClicar4={() => { navigate('/chat') }}
+                        aoClicar1={() => { navigate('/') }}
 
                     />
                 </div>
             </div>
-            <EditarPerfil classe={tooglePrincipalComponent ? '': 'zindex'} 
-                aoClicarRetangulo={() => {setTooglePrincipalComponent(false)}}
-                aoClicarCancelar={() => {setTooglePrincipalComponent(false)}}
+            <EditarPerfil classe={tooglePrincipalComponent ? '' : 'zindex'}
+                aoClicarRetangulo={() => { setTooglePrincipalComponent(false) }}
+                aoClicarCancelar={() => { setTooglePrincipalComponent(false) }}
             />
 
         </div>

@@ -11,6 +11,7 @@ import { Noticia } from './pages/Noticia';
 import { NoticiaWebView } from './pages/NoticiaWebView';
 import { RedefinirSenha } from './pages/RedefinirSenha';
 import { NoticiaError } from './pages/NoticiaError';
+import { AlterarFotoPerfil } from './pages/AlterarFotoPerfil';
 // import About from './components/About';
 // import Contact from './components/Contact';
 
@@ -30,6 +31,7 @@ export function Rotas() {
           <Route path="/noticiaWebView" element={<NoticiaWebView/>} />
           <Route path="/redefinirsenha" element={<RedefinirSenha/>} />
           <Route path="/noticiaError" element={<NoticiaError/> }/>
+          <Route path="/alterarfotoperfil" element={<AlterarFotoPerfil/> }/>
           
       </Routes>
     </BrowserRouter>

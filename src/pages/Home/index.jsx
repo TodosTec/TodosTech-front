@@ -14,6 +14,24 @@ export function Home() {
     const [postRepetido, setPostRepetido] = useState(false);
     const [loading, setLoading] = useState(false);
 
+    
+    async function getPosts() {
+        setLoading(true);
+        try {
+            const response = await axios.get('http://localhost:8080/api/todostec/post/selecionar/random');
+            const newPosts = response.data;
+            setPostsArray(prevPosts => [...prevPosts, ...newPosts]);
+            if (response.data.length < 50 && postsArray.length >= 50) {
+                // console.log('entrou');
+                setPostRepetido(true);
+            }
+        } catch (error) {
+            console.log(error);
+        } finally {
+            setLoading(false);
+        }
+    }
+    
     useEffect(() => {
         if (localStorage.getItem('status') === 'deslogado') {
             navigate('/login');
@@ -28,7 +46,7 @@ export function Home() {
         const handleScroll = () => {
             const { scrollTop, scrollHeight, clientHeight } = container;
             if (scrollHeight - scrollTop === clientHeight) {
-                console.log('Chegou no final do scroll');
+                // console.log('Chegou no final do scroll');
                 getPosts();
             }
         };
@@ -46,59 +64,41 @@ export function Home() {
         }
     }, []);
 
-    async function getPosts() {
-        setLoading(true);
-        try {
-            const response = await axios.get('http://localhost:8080/api/todostec/post/selecionar/random');
-            const newPosts = response.data;
-            setPostsArray(prevPosts => [...prevPosts, ...newPosts]);
-            if (response.data.length < 50 && postsArray.length >= 50) {
-                console.log('entrou');
-                setPostRepetido(true);
-            }
-        } catch (error) {
-            console.log(error);
-        } finally {
-            setLoading(false);
-        }
-    }
-
-    return (
-        <div className="Home">
-            <img src={logo} alt="" />
-            <div className="container" ref={containerRef} style={{ height: '400px', overflowY: 'scroll' }}>
-                {postsArray.map((post, index) => (
-                            <Post
-                                key={index}
-                                nome={post.usuario.cnome}
-                                text={post.ctexto}
-                                username={post.usuario.cusername}
-                                // repetido={true}
-                                aoClicar={() => {
-                                    // setUrlNoticiaAtomValue(noticia.url);
-                                    // navigate('/noticiaWebView');
-                                }}
-                            />
-                ))}
-                {loading ? <p className='carregando'>Carregando Posts...</p> : null}
-            </div>
-            <div className="bottomItens">
+return (
+    <div className="Home">
+        <img src={logo} alt="" />
+        <div className="container" ref={containerRef} style={{ height: '400px', overflowY: 'scroll' }}>
+            {postsArray.map((post, index) => (
+                <Post
+                    key={index}
+                    nome={post.usuario.cnome}
+                    text={post.ctexto}
+                    username={post.usuario.cusername}
+                    aoClicar={() => {}}
+                />
+            ))}
+            {loading ? <p className="carregando">Carregando Posts...</p> : null}
+        </div>
+        <div className="bottomItens">
+            {loading ? '' : (
                 <CircleFlutuamteButton
                     aoClicar={() => {
-                        // navigate('/fazerPost')
-                        console.log(postsArray);
+                        navigate('/fazerPost')
+                        // console.log(postsArray);
                     }}
                 />
-                <NavBarFooter
-                    classe={1}
-                    aoClicar5={() => {
-                        navigate('/Perfil');
-                    }}
-                    aoClicar4={() => {
-                        navigate('/chat');
-                    }}
-                />
-            </div>
+            )}
+            <NavBarFooter
+                classe={1}
+                aoClicar5={() => {
+                    navigate('/Perfil');
+                }}
+                aoClicar4={() => {
+                    navigate('/chat');
+                }}
+            />
         </div>
-    );
+    </div>
+);
+
 }

@@ -96,7 +96,7 @@ export function RedefinirSenha(){
     return (
         <div className="RedefinirSenha">
             <div className="container">
-                    <div className="retangulo"></div>
+                    {/* <div className="retangulo"></div> */}
                     <div className="info">
                         <ArrowBack onClick={() => {navigate('/perfil')}} cssClasses={'cursor'}/>
                         <h1>Redefinir senha</h1>

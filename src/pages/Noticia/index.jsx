@@ -12,7 +12,7 @@ export function Noticia() {
     const navigate = useNavigate()
     const apiKey = '247551d41b16459681a804c7ec3271ac'
     const [arrayNoticias, setArrayNoticias] = useState([])
-    const [backgroundImageTop, setBackgroundImageTop] = useState('');
+    const [objectFirstNoticia, setObjectFirstNoticia] = useState({});
     const [urlNoticiaAtomValue, setUrlNoticiaAtomValue] = useAtom(urlNoticiaAtom)
     function getNoticias() {
         let temas = ['lgbt', 'gay', 'lesbian', 'bisexual', 'transgender']
@@ -42,8 +42,8 @@ export function Noticia() {
                     if (arrayNoticias.length >= 20) {
                         i = 6
                         for (let i = 0; i < arrayNoticias.length; i++) {
-                            if (arrayNoticias[i].urlToImage) {
-                                setBackgroundImageTop(arrayNoticias[i].urlToImage);
+                            if (arrayNoticias[i].urlToImage && arrayNoticias[i].title && arrayNoticias[i].author) {
+                                setObjectFirstNoticia(arrayNoticias[i]);
                                 break; // Sai do loop quando encontra a primeira imagem de URL válida
                             }
                         }
@@ -68,9 +68,9 @@ export function Noticia() {
         <div className="Noticia">
             <img src={logo} alt="" />
             <div className="container">
-                <div className="top" style={{ backgroundImage: `url(${backgroundImageTop})` }}>
-                    <h1 className="titulo">Lorem, ipsum dolor.</h1>
-                    <p>Lorem Ipsum Dolor</p>
+                <div className="top" style={{ backgroundImage: `url(${objectFirstNoticia.urlToImage})` }}>
+                    <h1 className="titulo">{objectFirstNoticia.title}</h1>
+                    <p>{objectFirstNoticia.author}</p>
                 </div>
                 <div className="noticiasDesc">
                     {arrayNoticias.map((noticia, index) => (
