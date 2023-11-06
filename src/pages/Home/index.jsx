@@ -6,6 +6,9 @@ import { CircleFlutuamteButton } from '../../components/CircleFlutuanteButton';
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
+import { PostEmpresa } from '../../components/PostEmpresa';
+import { idAtom, usernameAtom, urlFotoPerfilAtom } from '../../states'
+import { useAtom } from 'jotai';
 
 export function Home() {
     const navigate = useNavigate();
@@ -13,13 +16,28 @@ export function Home() {
     const [postsArray, setPostsArray] = useState([]);
     const [postRepetido, setPostRepetido] = useState(false);
     const [loading, setLoading] = useState(false);
+    const [idAtomValue, setIdAtomValue] = useAtom(idAtom)
+    const [usernameAtomValue, setUsernameAtomValue] = useAtom(usernameAtom)
+    const [urlFotoPerfilAtomValue, setUrlFotoPerfilAtomValue] = useAtom(urlFotoPerfilAtom)
 
-    
+    function getFotoPerfil(){
+        axios({
+            method: "get",
+            url: `http://localhost:8080/api/todostec/selecionar/username/${usernameAtomValue}`
+        })
+        .then((promisse) => {
+            setUrlFotoPerfilAtomValue(promisse.data.clinkfoto)
+        })
+        .catch((error) => {
+            console.log(error)
+        })
+    }
     async function getPosts() {
         setLoading(true);
         try {
-            const response = await axios.get('http://localhost:8080/api/todostec/post/selecionar/random');
-            const newPosts = response.data;
+            const response = await axios.get(`http://localhost:8080/api/todostec/post/find/posts/${idAtomValue}`);
+            // console.log(response.data);
+            const newPosts = response.data.content;
             setPostsArray(prevPosts => [...prevPosts, ...newPosts]);
             if (response.data.length < 50 && postsArray.length >= 50) {
                 // console.log('entrou');
@@ -31,7 +49,7 @@ export function Home() {
             setLoading(false);
         }
     }
-    
+
     useEffect(() => {
         if (localStorage.getItem('status') === 'deslogado') {
             navigate('/login');
@@ -64,42 +82,54 @@ export function Home() {
         }
     }, []);
 
-return (
-    <div className="Home">
-        <img src={logo} alt="" />
-        <div className="container" ref={containerRef} style={{ height: '400px', overflowY: 'scroll' }}>
-            {postsArray.map((post, index) => (
-                <Post
-                    key={index}
-                    nome={post.usuario.cnome}
-                    text={post.ctexto}
-                    username={post.usuario.cusername}
-                    fotoPerfil={post.usuario.clinkfoto}
-                    aoClicar={() => {}}
-                />
-            ))}
-            {loading ? <p className="carregando">Carregando Posts...</p> : null}
-        </div>
-        <div className="bottomItens">
-            {loading ? '' : (
-                <CircleFlutuamteButton
-                    aoClicar={() => {
-                        navigate('/fazerPost')
-                        // console.log(postsArray);
+    return (
+        <div className="Home">
+            <img src={logo} alt="" />
+            <div className="container" ref={containerRef} style={{ height: '400px', overflowY: 'scroll' }}>
+                {postsArray.map((post, index) => (
+                    post.usuario.clinksite === "null" || post.usuario.clinksite === null ? (
+                        <Post
+                            key={index}
+                            nome={post.usuario.cnome}
+                            text={post.ctexto}
+                            username={post.usuario.cusername}
+                            fotoPerfil={post.usuario.clinkfoto}
+                            aoClicar={() => { }}
+                        />
+                    ) : (
+                        <PostEmpresa
+                            key={index}
+                            nome={post.usuario.cnome}
+                            texto={post.ctexto}
+                            username={post.usuario.cusername}
+                            link={post.usuario.clinksite == null ? '' : post.usuario.clinksite}   
+                        />
+                    )
+                ))}
+
+
+                {loading ? <p className="carregando">Carregando Posts...</p> : null}
+            </div>
+            <div className="bottomItens">
+                {loading ? '' : (
+                    <CircleFlutuamteButton
+                        aoClicar={() => {
+                            navigate('/fazerPost')
+                            // console.log(postsArray);
+                        }}
+                    />
+                )}
+                <NavBarFooter
+                    classe={1}
+                    aoClicar5={() => {
+                        navigate('/Perfil');
+                    }}
+                    aoClicar4={() => {
+                        navigate('/chat');
                     }}
                 />
-            )}
-            <NavBarFooter
-                classe={1}
-                aoClicar5={() => {
-                    navigate('/Perfil');
-                }}
-                aoClicar4={() => {
-                    navigate('/chat');
-                }}
-            />
+            </div>
         </div>
-    </div>
-);
+    );
 
 }
