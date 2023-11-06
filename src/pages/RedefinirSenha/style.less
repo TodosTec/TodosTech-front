@@ -10,24 +10,20 @@
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        // align-items: center;
-        .top{
+        align-items: center;
+        gap: 20px;
+        padding-top: 10px;
+        .retangulo{
+            width: 15px;
+            height: 3px;
+            background-color: lightgray;
+            border-radius: 100;
+        }
+        .info{
             display: flex;
-            flex-direction: column;
             width: 100%;
-            align-items: center;
-            padding: 10px 20px 0px 20px;
-            gap: 30px;
-            .retangulo{
-                width: 15px;
-                height: 3px;
-                background-color: lightgray;
-                border-radius: 100;
-            }
-            .info{
-                display: flex;
-                width: 100%;
-                justify-content: space-between;
+            justify-content: space-between;
+            padding-left: 20px;
                 .invisivel{
                     // display: cozzz;
                     width: 1px;
@@ -39,10 +35,25 @@
                 flex-direction: column;
                 gap: 40px;
                 width: 100%;
+                flex-grow: 1;
+                justify-content: space-between;
                 >div{
                     min-width: 100%;
                 }
-            }
+                .inputs{
+                    display: flex;
+                    flex-direction: column;
+                    width: 100%;
+                    align-items: center;
+                    padding: 10px 20px 0px 20px;
+                    gap: 30px;
+                    flex-grow: .4;
+                    justify-content: center;
+                    p{
+                        color: var(--mediumBlue);
+                        font-size: 1.2rem;
+                    }
+                }
         }
         .buttons{
             display: flex;
@@ -63,4 +74,7 @@
             }
         }
     }
+    // .sumido{
+    //     display: none;
+    // }
 }
