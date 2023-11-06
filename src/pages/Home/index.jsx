@@ -74,6 +74,7 @@ return (
                     nome={post.usuario.cnome}
                     text={post.ctexto}
                     username={post.usuario.cusername}
+                    fotoPerfil={post.usuario.clinkfoto}
                     aoClicar={() => {}}
                 />
             ))}

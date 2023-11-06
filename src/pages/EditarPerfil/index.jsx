@@ -6,6 +6,7 @@ import {Link, useNavigate} from 'react-router-dom'
 import {usernameAtom, idAtom} from '../../states'
 import { useAtom } from 'jotai'
 import axios from 'axios'
+import { urlFotoPerfilAtom } from '../../states'
 import { SelectCampo } from '../../components/SelectCampo'
 export function EditarPerfil({classe = '', aoClicarRetangulo, aoClicarCancelar}){
     const [nome, setNome] = useState('')
@@ -18,6 +19,8 @@ export function EditarPerfil({classe = '', aoClicarRetangulo, aoClicarCancelar})
     const [usernameAtomValue, setUsernameAtomValue] = useAtom(usernameAtom)
     const [idAtomValue, setIdAtomValue] = useAtom(idAtom)
     const [ultimoUsuario, setUltimoUsuario] = useState({})
+    const [urlFotoPerfilAtomValue, setUrlFotoPerfilAtomValue] = useAtom(urlFotoPerfilAtom)
+
     const navigate = useNavigate()
 
     async function alterarPerfil(e){
@@ -106,8 +109,10 @@ export function EditarPerfil({classe = '', aoClicarRetangulo, aoClicarCancelar})
                 <div className="top">
                     <div className="retangulo" onClick={aoClicarRetangulo}></div>
                     <div className="fotoDePerfil">
-                        <div className="foto"></div>
-                        <p>Trocar foto de Perfil</p>
+                        <div className="foto" style={{ backgroundImage: `url(${urlFotoPerfilAtomValue})` }}></div>
+                        <Link to='/alterarfotoperfil'>
+                            <p>Trocar foto de Perfil</p>
+                        </Link>
                     </div>
                 </div>
                 <form className="infoPerfil" onSubmit={alterarPerfil}>
