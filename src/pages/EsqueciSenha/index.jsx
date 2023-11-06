@@ -3,7 +3,7 @@ import { ButtonBigBlue } from '../../components/ButtonBigPurple'
 import { InputDefault } from '../../components/InputDefault'
 import { TextCaseCadastro } from '../../components/TextCaseCadastro'
 import { useState , useEffect } from 'react'
-import logo from '../../assets/logo.svg'
+import logo from '../../assets/logo.png'
 import { ArrowBackOutline } from 'react-ionicons'
 import { Link, useNavigate } from "react-router-dom";
 

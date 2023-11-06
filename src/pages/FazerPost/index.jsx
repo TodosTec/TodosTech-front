@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { ButtonOutline } from '../../components/ButtonOutline';
 import './style.less';
-import logo from '../../assets/logo.svg';
+import logo from '../../assets/logo.png';
 import { Navigate, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import axios from 'axios';

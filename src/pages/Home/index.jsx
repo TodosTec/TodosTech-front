@@ -1,5 +1,5 @@
 import './style.less';
-import logo from '../../assets/logo.svg';
+import logo from '../../assets/logo.png';
 import { NavBarFooter } from '../../components/NavBarFooter';
 import { Post } from '../../components/Post';
 import { CircleFlutuamteButton } from '../../components/CircleFlutuanteButton';
@@ -36,7 +36,7 @@ export function Home() {
         setLoading(true);
         try {
             const response = await axios.get(`http://localhost:8080/api/todostec/post/find/posts/${idAtomValue}`);
-            // console.log(response.data);
+            console.log(response.data);
             const newPosts = response.data.content;
             setPostsArray(prevPosts => [...prevPosts, ...newPosts]);
             if (response.data.length < 50 && postsArray.length >= 50) {
@@ -94,7 +94,8 @@ export function Home() {
                             text={post.ctexto}
                             username={post.usuario.cusername}
                             fotoPerfil={post.usuario.clinkfoto}
-                            aoClicar={() => { }}
+                            aoClicar={() => {}}
+
                         />
                     ) : (
                         <PostEmpresa
