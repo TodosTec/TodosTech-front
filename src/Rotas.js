@@ -19,12 +19,12 @@ export function Rotas() {
   return (
     <BrowserRouter>
       <Routes>
-          <Route path="/login" element={<Cadastro />} />
+          <Route path="/" element={<Cadastro />} />
           <Route path="/esqueciSenha" element={<EsqueciSenha/>} />
           <Route path="/chat" element={<Chat/>} />
           <Route path="/perfil" element={<Perfil/>} />
           <Route path="/editarperfil" element={<EditarPerfil/>} />
-          <Route path="/" element={<Home/>} />
+          <Route path="/home" element={<Home/>} />
           <Route path="/chatprivado" element={<ChatPrivado/>} />
           <Route path="/fazerpost" element={<FazerPost/>} />
           <Route path="/noticia" element={<Noticia/>} />

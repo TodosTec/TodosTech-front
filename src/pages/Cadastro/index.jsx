@@ -36,13 +36,12 @@
                 } else if (promisse.data.includes('Optional')) {
                     const regex = /ncdusuario=(\d+)/;
                     const match = promisse.data.match(regex);
-                
                     if (match) {
                         const valorNcdusuario = match[1];
                         setIdAtomValue(parseInt(valorNcdusuario));
                         setUsernameAtomValue(nomeUsuario);
                         localStorage.setItem('status', 'logado');
-                        navigate('/');
+                        navigate('/home');
                     } else {
                         console.log('Valor de ncdusuario não encontrado');
                     }
@@ -58,11 +57,11 @@
         }
         useEffect(() => {
             if(localStorage.getItem('status') === 'deslogado'){
-                navigate('/login')
+                navigate('/')
             } else if(localStorage.getItem('status') === 'logado'){
-    
+                navigate('/home')
             } else{
-                navigate('/login')
+                navigate('/')
             }
     }, [])
         return (

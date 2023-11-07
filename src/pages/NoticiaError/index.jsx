@@ -13,7 +13,7 @@ export function NoticiaError() {
             </div>
             <NavBarFooter 
                 classe={2}
-                aoClicar1={() => {navigate('/')}}
+                aoClicar1={() => {navigate('/home')}}
                 aoClicar3={() => {navigate('/chat')}}
                 aoClicar4={() => {navigate('/perfil')}}
             />

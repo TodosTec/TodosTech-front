@@ -64,6 +64,17 @@ export function Noticia() {
     useEffect(() => {
         getNoticias()
     }, [])
+    
+    useEffect(() => {
+        if (localStorage.getItem("status") === "deslogado") {
+          navigate("/");
+        } else if (localStorage.getItem("status") === "logado") {
+            
+        }
+        else{
+          navigate('/')
+        }
+      }, []);
     return (
         <div className="Noticia">
             <img src={logo} alt="" />

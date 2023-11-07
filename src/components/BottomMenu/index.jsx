@@ -22,7 +22,7 @@ export function BottomMenu({
             <div className="retangulo" onClick={aoClicarRetangulo}></div>
             <div className="itens">
                 {option1}
-                {option2}
+                {option2}   
                 <ItemBottomMenu 
                     icon={<ExitOutline cssClasses='icon'/>}
                     titulo='Sair' 

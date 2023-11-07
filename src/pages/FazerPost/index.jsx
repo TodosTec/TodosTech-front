@@ -38,11 +38,11 @@ export function FazerPost() {
 
     useEffect(() => {
         if (localStorage.getItem('status') === 'deslogado') {
-            navigate('/login');
+            navigate('/');
         } else if (localStorage.getItem('status') === 'logado') {
             // Se necessário, adicione lógica adicional para o estado "logado"
         } else {
-            navigate('/login');
+            navigate('/');
         }
     }, []);
 
@@ -59,7 +59,7 @@ export function FazerPost() {
                     <ButtonOutline
                         text="Cancelar"
                         aoClicar={() => {
-                            navigate('/');
+                            navigate('/home');
                         }}
                     />
                     <ButtonOutline

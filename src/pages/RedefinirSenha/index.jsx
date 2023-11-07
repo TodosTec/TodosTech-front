@@ -77,7 +77,7 @@ export function RedefinirSenha(){
             if(response.data.includes("Usuario atualizado com sucesso.")){
                 // console.log('entrou')
                 // setUsernameAtomValue(ultimoUsuario.cusername)
-                navigate('/login')
+                navigate('/')
                 alert('Faça login para concluir.')
             }
         })

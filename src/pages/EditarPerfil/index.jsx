@@ -68,7 +68,7 @@ export function EditarPerfil({classe = '', aoClicarRetangulo, aoClicarCancelar})
             if(response.data.includes("Usuario atualizado com sucesso.")){
                 // console.log('entrou')
                 // setUsernameAtomValue(ultimoUsuario.cusername)
-                navigate('/login')
+                navigate('/')
                 alert('Faça login para concluir.')
             }
         })
@@ -90,17 +90,17 @@ export function EditarPerfil({classe = '', aoClicarRetangulo, aoClicarCancelar})
 
     useEffect(() => {
         if(localStorage.getItem('status') === 'deslogado'){
-            navigate('/login')
+            navigate('/')
         } else if(localStorage.getItem('status') === 'logado'){
 
         } else{
-            navigate('/login')
+            navigate('/')
         }
 }, [])
     useEffect(() => {
         if(usernameAtomValue === '' || idAtomValue === ''){
             localStorage.setItem('status', 'deslogado')
-            navigate('/login')
+            navigate('/')
         }
     }, [])
     return(
@@ -108,7 +108,7 @@ export function EditarPerfil({classe = '', aoClicarRetangulo, aoClicarCancelar})
             <div className="container">
                 <div className="top">
                     <div className="retangulo" onClick={aoClicarRetangulo}></div>
-                    <div className="fotoDePerfil" onClick={() => {console.log(pronome, );}}>
+                    <div className="fotoDePerfil" onClick={() => {console.log(sexualidade);}}>
                         <div className="foto" style={{ backgroundImage: `url(${urlFotoPerfilAtomValue})` }}></div>
                         <Link to='/alterarfotoperfil'>
                             <p>Trocar foto de Perfil</p>
