@@ -21,7 +21,7 @@ export function Perfil() {
   function getUserAllPosts() {
     axios({
       method: "get",
-      url: `http://localhost:8080/api/todostec/post/selecionar/${usernameAtomValue}`,
+      url: `https://api-3wfy.onrender.com/api/todostec/post/selecionar/${usernameAtomValue}`,
     })
       .then((promise) => {
         setArrayPosts(promise.data.reverse());
@@ -33,7 +33,7 @@ export function Perfil() {
   function getUser() {
     axios({
       method: "get",
-      url: `http://localhost:8080/api/todostec/selecionar/username/${usernameAtomValue}`,
+      url: `https://api-3wfy.onrender.com/api/todostec/selecionar/username/${usernameAtomValue}`,
     })
       .then((promise) => {
         setUrlFotoPerfilAtomValue(promise.data.clinkfoto)

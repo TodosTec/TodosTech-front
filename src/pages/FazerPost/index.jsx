@@ -17,7 +17,7 @@ export function FazerPost() {
         if (postText) {
             axios({
                 method: "POST",
-                url: "http://localhost:8080/api/todostec/post/inserir",
+                url: "https://api-3wfy.onrender.com/api/todostec/post/inserir",
                 data: {ctexto: postText, ncdusuario: idAtomValue}
             })
             .then((promisse) => {
