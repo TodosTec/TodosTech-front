@@ -7,16 +7,20 @@
     border-radius: 10px;
     border: 1px solid var(--mediumBlue); 
     // min-width: 100%;
-    width: 100% !important;
+    width: 90% !important;
     max-width: 570px;
+    @media screen and (max-width: 350px) {
+        max-width: 240px;
+        // height: 240px;
+    }
     p{
-        font-size: .7rem;
+        font-size: .7rem !important;
         color: var(--mediumBlue);
     }
     input{
         background-color: inherit;
         border: none;
-        font-size: .9rem;
+        font-size: .7rem !important;
         max-width: 95%;
         color:var(--mediumBlue);
     }

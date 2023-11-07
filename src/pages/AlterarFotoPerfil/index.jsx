@@ -13,16 +13,16 @@ export function AlterarFotoPerfil(){
     const [ultimoUsuario, setUltimoUsuario] = useState({})
     const [valorFoto, setValorFoto] = useState()
     const [idAtomValue, setIdAtomValue] = useAtom(idAtom)
+    const [confirme, setConfirme] = useState(false)
     const navigate = useNavigate()
 
     async function alterarPerfil(e){
         // e.preventDefault()
             await axios({
                 method: "get",
-                url: `http://localhost:8080/api/todostec/selecionar/username/${usernameAtomValue}`
+                url: `https://api-3wfy.onrender.com/api/todostec/selecionar/username/${usernameAtomValue}`
             })
             .then((promisse) => {
-                console.log(promisse.data)  
                 setUltimoUsuario({
                     ncdusuario: promisse.data.ncdusuario, 
                     cnome: promisse.data.cnome ,
@@ -36,18 +36,24 @@ export function AlterarFotoPerfil(){
                     ncdsexualidade: promisse.data.ncdsexualidade ,
                     cdescricao: promisse.data.cdescricao,
                     clinksite: 'null',
-                    clinkfoto: valorFoto != '' ? valorFoto : promisse.data.clinkfoto
+                    clinkfoto: valorFoto
                 })
             })
             .catch((error) => {
                 console.log(error)
             })
 
+            setarUsuario()
+
     }
     function setarUsuario(){
+        console.log(ultimoUsuario);
+        if(Object.keys(ultimoUsuario).length === 0){
+            setConfirme(true)
+        }
             axios({
                 method: "put",
-                url: `http://localhost:8080/api/todostec/atualizar/${idAtomValue}`,
+                url: `https://api-3wfy.onrender.com/api/todostec/atualizar/${idAtomValue}`,
                 data: ultimoUsuario
             })
             .then((response) => {
@@ -60,11 +66,8 @@ export function AlterarFotoPerfil(){
             .catch((error) => {
                 console.log(error);
             })
-    }
 
-    useEffect(() => {
-        setarUsuario()
-    }, [ultimoUsuario])
+    }
 
     return (
         <div className="AlterarFotoPerfil">
@@ -120,6 +123,11 @@ export function AlterarFotoPerfil(){
                         </div>
                     </div>
                 </div>
+                {
+                    confirme ? (
+                        <p>Aperte em definir denovo para confirmar</p>
+                    ) : null
+                }
                 <div className="buttons">
                     <ButtonOutline text='Cancelar' aoClicar={() => {navigate('/editarperfil')}}/>
                     <ButtonOutline text='Definir' aoClicar={() => {alterarPerfil()}}/>

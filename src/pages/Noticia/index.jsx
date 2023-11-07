@@ -1,7 +1,7 @@
 import { BottomMenu } from '../../components/BottomMenu'
 import { NavBarFooter } from '../../components/NavBarFooter'
 import './style.less'
-import logo from '../../assets/logo.svg'
+import logo from '../../assets/logo.png'
 import { NoticiaComponente } from '../../components/NoticiaComponente'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'

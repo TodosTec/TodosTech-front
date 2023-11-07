@@ -23,7 +23,7 @@ export function RedefinirSenha(){
         if(senhaNova == confSenhaNova){
             setSenhaDiferente(false)
             await axios({method: "get",
-                url: `http://localhost:8080/api/todostec/selecionar/username/${usernameAtomValue}`
+                url: `https://api-3wfy.onrender.com/api/todostec/selecionar/username/${usernameAtomValue}`
             })
             .then((promisse) => {
                 console.log(promisse);
@@ -69,7 +69,7 @@ export function RedefinirSenha(){
         console.log(ultimoUsuario);
         axios({
             method: "put",
-            url: `http://localhost:8080/api/todostec/atualizar/${idAtomValue}`,
+            url: `https://api-3wfy.onrender.com/api/todostec/atualizar/${idAtomValue}`,
             data: ultimoUsuario
         })
         .then((response) => {

@@ -1,22 +1,23 @@
 import { useState } from 'react';
 import { ButtonOutline } from '../../components/ButtonOutline';
 import './style.less';
-import logo from '../../assets/logo.svg';
+import logo from '../../assets/logo.png';
 import { Navigate, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import axios from 'axios';
-import {idAtom} from '../../states'
+import {idAtom, urlFotoPerfilAtom} from '../../states'
 import { useAtom } from 'jotai';
 export function FazerPost() {
     const navigate = useNavigate();
     const [postText, setPostText] = useState('');
     const [idAtomValue, setIdAtomValue] = useAtom(idAtom)
+    const [urlFotoPerfilAtomValue, setUrlFotoPerfilAtomValue] = useAtom(urlFotoPerfilAtom)
     const handlePost = () => {
         // Aqui você pode enviar o texto do post para onde for necessário
         if (postText) {
             axios({
                 method: "POST",
-                url: "http://localhost:8080/api/todostec/post/inserir",
+                url: "https://api-3wfy.onrender.com/api/todostec/post/inserir",
                 data: {ctexto: postText, ncdusuario: idAtomValue}
             })
             .then((promisse) => {
@@ -68,7 +69,7 @@ export function FazerPost() {
                     />
                 </div>
                 <div className="inputPost">
-                    <div className="fotoPerfil"></div>
+                    <div className="fotoPerfil" style={{ backgroundImage: `url(${urlFotoPerfilAtomValue})` }}></div>
                     <h1>O que deseja postar hoje?</h1>
                 </div>
                 <div className="textField">

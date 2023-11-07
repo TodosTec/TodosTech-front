@@ -4,7 +4,7 @@
     import { InputDefault } from '../../components/InputDefault'
     import { TextCaseCadastro } from '../../components/TextCaseCadastro'
     import { useEffect, useState } from 'react'
-    import logo from '../../assets/logo.svg'
+    import logo from '../../assets/logo.png'
     import axios from 'axios';  
     import { Link, useNavigate } from 'react-router-dom'
     import { useAtom } from 'jotai'
@@ -24,7 +24,7 @@
             e.preventDefault()
             axios({
                 method: "post",
-                url: "http://localhost:8080/api/todostec/selecionar/login",
+                url: "https://api-3wfy.onrender.com/api/todostec/selecionar/login",
                 data: {
                     cusername: nomeUsuario,
                     csenha: senha,
@@ -72,17 +72,17 @@
                     <div className="form-inputs">
                         <label htmlFor="">
                             Nome de usuário
-                            <InputDefault typeInput='text' valor={nomeUsuario} setValor={setNomeUsuario} />
+                            <InputDefault typeInput='text' valor={nomeUsuario} setValor={setNomeUsuario} classe='inputLogin'/>
                         </label>
                         <TextCaseCadastro text='Username incorreto' estado={usernameIncorreto} classe='erros' />
                         <label htmlFor="">
                             Senha
-                            <InputDefault typeInput='password' valor={senha} setValor={setSenha} />
+                            <InputDefault typeInput='password' valor={senha} setValor={setSenha} classe='inputLogin'/>
                         </label>
                         <TextCaseCadastro text='senha Incorreta' estado={senhaIncorreta} classe='erros' />
-                        <Link className='esqueciSenha' to='/esqueciSenha'>Esqueci minha senha</Link>
+                        {/* <Link className='esqueciSenha' to='/esqueciSenha'>Esqueci minha senha</Link> */}
                     </div>
-                    <ButtonBigBlue type="submit" />
+                    <ButtonBigBlue type="submit"/>
                 </form>
             </div>
         )

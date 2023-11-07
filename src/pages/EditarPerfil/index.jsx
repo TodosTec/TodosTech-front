@@ -31,7 +31,7 @@ export function EditarPerfil({classe = '', aoClicarRetangulo, aoClicarCancelar})
             setNenhumCampoAlterado(false)
             await axios({
                 method: "get",
-                url: `http://localhost:8080/api/todostec/selecionar/username/${usernameAtomValue}`
+                url: `https://api-3wfy.onrender.com/api/todostec/selecionar/username/${usernameAtomValue}`
             })
             .then((promisse) => {
                 console.log(promisse.data)  
@@ -60,7 +60,7 @@ export function EditarPerfil({classe = '', aoClicarRetangulo, aoClicarCancelar})
     function alterarPerfilReq(){
         axios({
             method: "put",
-            url: `http://localhost:8080/api/todostec/atualizar/${idAtomValue}`,
+            url: `https://api-3wfy.onrender.com/api/todostec/atualizar/${idAtomValue}`,
             data: ultimoUsuario
         })
         .then((response) => {
