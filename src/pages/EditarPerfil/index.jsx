@@ -89,6 +89,15 @@ export function EditarPerfil({classe = '', aoClicarRetangulo, aoClicarCancelar})
     }, [ultimoUsuario])
 
     useEffect(() => {
+        if(localStorage.getItem('status') === 'deslogado'){
+            navigate('/')
+        } else if(localStorage.getItem('status') === 'logado'){
+
+        } else{
+            navigate('/')
+        }
+}, [])
+    useEffect(() => {
         if(usernameAtomValue === '' || idAtomValue === ''){
             localStorage.setItem('status', 'deslogado')
             navigate('/')

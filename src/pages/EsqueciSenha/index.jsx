@@ -12,6 +12,17 @@ export function EsqueciSenha(){
     const [codigoIncorreto, setCodigoIncorreto] = useState(true)
     const [senhaDiferente,setSenhaDiferente] = useState(true)
     const navigate = useNavigate()
+
+    useEffect(() => {
+        if(localStorage.getItem('status') === 'deslogado'){
+            navigate('/')
+        } else if(localStorage.getItem('status') === 'logado'){
+
+        } else{
+            navigate('/')
+        }
+}, [])
+    
     return (
         <div className='EsqueciSenha'>
                 <span>

@@ -10,6 +10,15 @@ export function NoticiaWebView() {
     // window.addEventListener('message', function(event) {
     //     console.log(event.origin);
     //   });
+    useEffect(() => {
+        if (localStorage.getItem("status") === "deslogado") {
+          navigate("/");
+        } else if (localStorage.getItem("status") === "logado") {
+        }
+        else{
+          navigate('/')
+        }
+      }, []);
     return (
         <div className="NoticiaWebView">
             <div className="container">

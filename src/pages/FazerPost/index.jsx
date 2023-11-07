@@ -36,6 +36,16 @@ export function FazerPost() {
         setPostText(e.target.value);
     };
 
+    useEffect(() => {
+        if (localStorage.getItem('status') === 'deslogado') {
+            navigate('/');
+        } else if (localStorage.getItem('status') === 'logado') {
+            // Se necessário, adicione lógica adicional para o estado "logado"
+        } else {
+            navigate('/');
+        }
+    }, []);
+
     const buttonStyle = {
         backgroundColor: postText ? '#FD3D6C' : '',
         pointerEvents: postText ? 'auto' : 'none',

@@ -108,6 +108,17 @@ export function Perfil() {
         console.log(error);
       });
   }
+
+  useEffect(() => {
+    getUserAllPosts();
+    getUser();
+    if (localStorage.getItem("status") === "deslogado") {
+      navigate("/");
+    } else if (localStorage.getItem("status") === "logado") {
+    } else {
+      navigate("/");
+    }
+  }, []);
   return (
     <div className="conserto">
       <div className={tooglePrincipalComponent ? "Perfil zindex" : "Perfil"}>
