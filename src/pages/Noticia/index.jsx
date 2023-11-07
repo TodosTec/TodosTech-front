@@ -20,20 +20,20 @@ export function Noticia() {
         for (let i = 0; i < temas.length; i++) {
             axios({
                 method: "get",
-                url: "https://newsapi.org/v2/everything",
+                url: "https://gnews.io/api/v4/search?q=example&apikey=6a057afdf7b0a712badd9ab73761d017",
                 params: {
                     q: temas[i],
-                    apiKey: apiKey,
                     to: new Date().toISOString().slice(0, 10),
                     from: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000).toISOString().slice(0, 10),
-                    sortBy: 'popularity',
-                    coutry: 'br',
-                    pageSize: valorPageSize,
-                    language: 'pt'
+                    // qtd: valorPageSize,
+                    sortby: 'relevance',
+                    lang: 'pt',
+                    Max: valorPageSize,
+                    in: 'title,description,content'
                 }
             })
                 .then((response) => {
-                    // console.log(response.data.articles);
+                    console.log(response.data);
                     for (let j = 0; j < response.data.articles.length; j++) {
                         // console.log(response.data.articles[j]);
                         arrayNoticias.push(response.data.articles[j])
