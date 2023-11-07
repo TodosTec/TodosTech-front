@@ -55,15 +55,6 @@
                     console.log(error)
                 });
         }
-        useEffect(() => {
-            if(localStorage.getItem('status') === 'deslogado'){
-                navigate('/')
-            } else if(localStorage.getItem('status') === 'logado'){
-                navigate('/home')
-            } else{
-                navigate('/')
-            }
-    }, [])
         return (
             <div className='Cadastro'>
                 <img src={logo} alt="Logo" />

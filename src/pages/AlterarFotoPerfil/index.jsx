@@ -69,16 +69,6 @@ export function AlterarFotoPerfil(){
 
     }
 
-
-    useEffect(() => {
-        if (localStorage.getItem("status") === "deslogado") {
-          navigate("/");
-        } else if (localStorage.getItem("status") === "logado") {
-        }
-        else{
-          navigate('/')
-        }
-      }, []);
     return (
         <div className="AlterarFotoPerfil">
             <div className="container">

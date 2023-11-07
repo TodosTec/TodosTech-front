@@ -52,23 +52,6 @@ export function Home() {
       setLoading(false);
     }
   }
-
-  useEffect(() => {
-    // console.log(idAtomValue);
-    if (localStorage.getItem("status") === "deslogado") {
-      navigate("/");
-    } else if (localStorage.getItem("status") === "logado") {
-    }
-    else{
-      navigate('/')
-    }
-
-    if(idAtomValue == ''){
-      localStorage.setItem('status', 'deslogado')
-      navigate('/')
-    }
-  }, []);
-
   useEffect(() => {
     const container = containerRef.current;
 

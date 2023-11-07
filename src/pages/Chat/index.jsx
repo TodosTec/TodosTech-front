@@ -8,15 +8,6 @@ import { useNavigate } from 'react-router-dom'
 import { useEffect } from 'react'
 export function Chat(){
     const navigate = useNavigate()
-    useEffect(() => {
-        if(localStorage.getItem('status') === 'deslogado'){
-            navigate('/')
-        } else if(localStorage.getItem('status') === 'logado'){
-            
-        } else{
-            navigate('/')
-        }
-}, [])
     return(
         <div className='Chat'>
             <div className="consertoPesquisa">
