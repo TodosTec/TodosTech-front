@@ -113,10 +113,10 @@ export function Perfil() {
     getUserAllPosts();
     getUser();
     if (localStorage.getItem("status") === "deslogado") {
-      navigate("/login");
+      navigate("/");
     } else if (localStorage.getItem("status") === "logado") {
     } else {
-      navigate("/login");
+      navigate("/");
     }
   }, []);
   return (
@@ -181,7 +181,7 @@ export function Perfil() {
               setTooglePrincipalComponent(true);
             }}
             aoClicarSair={() => {
-              navigate("/login");
+              navigate("/");
               localStorage.setItem("status", "deslogado");
             }}
             aoClicarOpt2={() => {
@@ -194,7 +194,7 @@ export function Perfil() {
               navigate("/chat");
             }}
             aoClicar1={() => {
-              navigate("/");
+              navigate("/home");
             }}
           />
         </div>

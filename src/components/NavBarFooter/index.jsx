@@ -15,7 +15,7 @@ export function NavBarFooter({classe = 1}){
     
     return(
         <nav className='NavBarFooter'>
-            <button className={classe === 1 ? 'principal': ''} onClick={() => {navegar('/')}} ><HomeOutline color='#FD3D6C'/></button>
+            <button className={classe === 1 ? 'principal': ''} onClick={() => {navegar('/home')}} ><HomeOutline color='#FD3D6C'/></button>
             <button className={classe === 2 ? 'principal': ''} onClick={() => {navegar('/noticia')}} ><NewspaperOutline color='#FD3D6C'/></button>
             {/* <button className={classe === 3 ? 'principal': ''} onClick={navegar()} ><BasketOutline/></button> */}
             <button className={classe === 4 ? 'principal': ''} onClick={() =>{navegar('/chat')}} ><MailOutline color='#FD3D6C'/></button>

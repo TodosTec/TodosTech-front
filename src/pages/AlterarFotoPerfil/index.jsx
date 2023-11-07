@@ -55,12 +55,12 @@ export function AlterarFotoPerfil(){
                 method: "put",
                 url: `https://api-3wfy.onrender.com/api/todostec/atualizar/${idAtomValue}`,
                 data: ultimoUsuario
-            })
+            })  
             .then((response) => {
-                console.log(response.data);
+                // console.log(response.data);
                 if(response.data.includes("Usuario atualizado com sucesso.")){
-                    navigate('/login')
-                    alert('Faça login para concluir.')
+                    // alert('Faça login para concluir.')
+                    navigate('/perfil')
                 }
             })
             .catch((error) => {
@@ -69,11 +69,21 @@ export function AlterarFotoPerfil(){
 
     }
 
+
+    useEffect(() => {
+        if (localStorage.getItem("status") === "deslogado") {
+          navigate("/");
+        } else if (localStorage.getItem("status") === "logado") {
+        }
+        else{
+          navigate('/')
+        }
+      }, []);
     return (
         <div className="AlterarFotoPerfil">
             <div className="container">
                 <div className="top">
-                    <Link to = '/cadastro'>
+                    <Link to = '/editarperfil'>
                             <ArrowBackOutline
                                 cssClasses={'ArrowBackOutline'}
                                 color='#f'

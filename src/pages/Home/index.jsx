@@ -39,7 +39,7 @@ export function Home() {
       const response = await axios.get(
         `https://api-3wfy.onrender.com/api/todostec/post/find/posts/${idAtomValue}`
       );
-      console.log(response.data);
+      // console.log(response.data);
       const newPosts = response.data.content;
       setPostsArray((prevPosts) => [...prevPosts, ...newPosts]);
       if (response.data.length < 50 && postsArray.length >= 50) {
@@ -54,12 +54,20 @@ export function Home() {
   }
 
   useEffect(() => {
+    // console.log(idAtomValue);
     if (localStorage.getItem("status") === "deslogado") {
-      navigate("/login");
-    } else if (localStorage.getItem("status") !== "logado") {
-      navigate("/login");
+      navigate("/");
+    } else if (localStorage.getItem("status") === "logado") {
     }
-  }, [navigate]);
+    else{
+      navigate('/')
+    }
+
+    if(idAtomValue == ''){
+      localStorage.setItem('status', 'deslogado')
+      navigate('/')
+    }
+  }, []);
 
   useEffect(() => {
     const container = containerRef.current;
