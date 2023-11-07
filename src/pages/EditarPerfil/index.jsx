@@ -108,7 +108,7 @@ export function EditarPerfil({classe = '', aoClicarRetangulo, aoClicarCancelar})
             <div className="container">
                 <div className="top">
                     <div className="retangulo" onClick={aoClicarRetangulo}></div>
-                    <div className="fotoDePerfil">
+                    <div className="fotoDePerfil" onClick={() => {console.log(pronome, );}}>
                         <div className="foto" style={{ backgroundImage: `url(${urlFotoPerfilAtomValue})` }}></div>
                         <Link to='/alterarfotoperfil'>
                             <p>Trocar foto de Perfil</p>
