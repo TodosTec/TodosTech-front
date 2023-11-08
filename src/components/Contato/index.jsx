@@ -5,7 +5,7 @@ export function Contato({nome = 'Tom Hiddlwaton', foto, ultimaMensagem = 'Dia 5 
     return (
         <div className='Contato' onClick={aoClicar}>
             <div className="left">
-                <div className="foto"></div>
+                <div className="foto" style={{ backgroundImage: `url(${foto})` }}></div>
                     <span className='coluna1'>
                         <h1>{nome}</h1>
                         <p>{ultimaMensagem}</p>
