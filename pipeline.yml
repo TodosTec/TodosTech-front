@@ -1,9 +1,9 @@
 name: Render React App Deploy
 
 on:
-  pull_request:
-    types:
-      - closed
+  push:
+    branches:
+      - Nicolas-Granatelli-patch-1
 
 jobs:
   build:
@@ -27,6 +27,4 @@ jobs:
       - name: Deploy to Render
         uses: johnbeynon/render-deploy-action@v0.0.8
         with:
-          service-id: ${{secrets.DEPLOY_HOOK_PROD}}
-          api-key: ${{secrets.API_KEY}}
-          build-directory: build
+          service-id: "https://api.render.com/deploy/srv-cl5h2m472pts73em0gsg?key=heCDV9InmtA"
