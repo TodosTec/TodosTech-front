@@ -1,9 +1,9 @@
 name: Render React App Deploy
 
 on:
-  push:
-    branches:
-      - Nicolas-Granatelli-patch-1
+  pull_request:
+    types:
+      - closed
 
 jobs:
   build:
