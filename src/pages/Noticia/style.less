@@ -1,0 +1,53 @@
+.Noticia{
+    background-color: #F3436E;
+    min-width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding-top: 25px;
+    gap: 25px;
+    >img{
+        min-width: 50px;
+        min-height: 50px;
+    }
+    .container{
+        background-color: var(--whiteDiferente);
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+        width: 100%;
+        border-radius: 20px 20px 0px 0px;
+        height: 100%;
+        .top{
+            border-radius: 20px 20px 0px 0px;
+            background-image: url('../../assets/tomhiddleston.png');
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+            // flex-grow: .01;
+            min-height: 30%;
+            width: 100%;
+            max-width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: end;
+            color: white;
+            padding-left: 10%;
+            padding-bottom: 20px;
+            gap: 10px;
+            h1{
+                max-height: 100%;
+                overflow: auto;
+                font-size: 2rem;
+            }
+            p{
+                font-size: 1.3rem;
+            }
+        }
+        .noticiasDesc{
+            padding: 20px 0px 68px;
+            flex-grow: 1;
+        }
+    }
+}
