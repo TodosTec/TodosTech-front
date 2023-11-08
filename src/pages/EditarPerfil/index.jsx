@@ -48,7 +48,7 @@ export function EditarPerfil({classe = '', aoClicarRetangulo, aoClicarCancelar})
                     ncdsexualidade: sexualidade != '' ? sexualidade : promisse.data.ncdsexualidade ,
                     cdescricao: descricao != '' ? descricao : promisse.data.cdescricao,
                     clinksite: 'null',
-                    clinkfoto: 'null'
+                    clinkfoto: promisse.data.clinkfoto
                 })
             })
             .catch((error) => {
