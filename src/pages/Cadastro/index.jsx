@@ -55,6 +55,11 @@
                     console.log(error)
                 });
         }
+        useEffect(() => {   
+            if(localStorage.getItem('status') == 'logado'){
+                navigate('/home')
+            }
+        }, [])
         return (
             <div className='Cadastro'>
                 <img src={logo} alt="Logo" />
