@@ -68,7 +68,7 @@ export function EditarPerfil({classe = '', aoClicarRetangulo, aoClicarCancelar})
             if(response.data.includes("Usuario atualizado com sucesso.")){
                 // console.log('entrou')
                 // setUsernameAtomValue(ultimoUsuario.cusername)
-                navigate('/')
+                navigate('/login')
                 alert('Faça login para concluir.')
             }
         })

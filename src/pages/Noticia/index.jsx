@@ -147,34 +147,35 @@ export function Noticia() {
                 <div className="noticiasDesc">
                     {controle
                         ? newArrayNoticias.map((noticia, index) => (
-                            noticia && (
+                            noticia && noticia.source ? (
                                 <NoticiaComponente
                                     key={index}
                                     titulo={noticia.title}
-                                    autor={noticia.source.name !== null ? noticia.source.name : 'Nome não encontrado'}
+                                    autor={noticia.source.name || 'Nome não encontrado'}
                                     data={new Date(noticia.publishedAt).toLocaleDateString('pt-BR')}
                                     aoClicar={() => {
                                         setUrlNoticiaAtomValue(noticia.url);
                                         navigate('/noticiaWebView');
                                     }}
                                 />
-                            )
+                            ) : null
                         ))
                         : arrayNoticias.map((noticia, index) => (
-                            noticia && (
+                            noticia && noticia.source ? (
                                 <NoticiaComponente
                                     key={index}
                                     titulo={noticia.title}
-                                    autor={noticia.source.name !== null ? noticia.source.name : 'Nome não encontrado'}
+                                    autor={noticia.source.name || 'Nome não encontrado'}
                                     data={new Date(noticia.publishedAt).toLocaleDateString('pt-BR')}
                                     aoClicar={() => {
                                         setUrlNoticiaAtomValue(noticia.url);
                                         navigate('/noticiaWebView');
                                     }}
                                 />
-                            )
+                            ) : null
                         ))
                     }
+
                 </div>
 
             </div>
