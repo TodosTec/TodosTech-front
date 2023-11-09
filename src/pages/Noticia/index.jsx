@@ -111,7 +111,7 @@ export function Noticia() {
             })
             .catch((error) => {
                 console.log(error.response.status);
-                if (error.response.status == 403) {
+                if (error.response.status == 403 || error.response.status == 429) {
                     setControle(true)
                     setObjectFirstNoticia(newArrayNoticias[0]);
 
@@ -142,39 +142,37 @@ export function Noticia() {
             <div className="container">
                 <div className="top" style={{ backgroundImage: `url(${objectFirstNoticia.image})` }}>
                     <h1 className="titulo">{objectFirstNoticia.title}</h1>
-                    <p>{objectFirstNoticia.source.name}</p>
                 </div>
                 <div className="noticiasDesc">
                     {controle
                         ? newArrayNoticias.map((noticia, index) => (
-                            noticia && (
+                            noticia && noticia.source ? (
                                 <NoticiaComponente
                                     key={index}
                                     titulo={noticia.title}
-                                    autor={noticia.source.name}
                                     data={new Date(noticia.publishedAt).toLocaleDateString('pt-BR')}
                                     aoClicar={() => {
                                         setUrlNoticiaAtomValue(noticia.url);
                                         navigate('/noticiaWebView');
                                     }}
                                 />
-                            )
+                            ) : null
                         ))
                         : arrayNoticias.map((noticia, index) => (
-                            noticia && (
+                            noticia && noticia.source ? (
                                 <NoticiaComponente
                                     key={index}
                                     titulo={noticia.title}
-                                    autor={noticia.source.name}
                                     data={new Date(noticia.publishedAt).toLocaleDateString('pt-BR')}
                                     aoClicar={() => {
                                         setUrlNoticiaAtomValue(noticia.url);
                                         navigate('/noticiaWebView');
                                     }}
                                 />
-                            )
+                            ) : null
                         ))
                     }
+
                 </div>
 
             </div>

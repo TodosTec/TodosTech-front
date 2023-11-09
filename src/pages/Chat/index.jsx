@@ -9,7 +9,7 @@ import { useEffect, useState } from 'react'
 import { socket, usernameAtom, room } from '../../states'
 import io from 'socket.io-client'
 import { useAtom } from 'jotai'
-
+import logo from '../../assets/logo.png'
 export function Chat() {
     const navigate = useNavigate();
     const [info, setInfo] = useState({});
@@ -21,6 +21,7 @@ export function Chat() {
             
     <div className="consertoPesquisa">
                 {/* <BarraDePesquisa/> */}
+                <img src={logo} alt="" />
             </div>
             <section className="main">
                 <div className="mensagens">
