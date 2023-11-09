@@ -20,6 +20,7 @@ export function Rotas() {
     <BrowserRouter>
       <Routes>
           <Route path="/" element={<Cadastro />} />
+          <Route path="/login" element={<Cadastro />} />
           <Route path="/esqueciSenha" element={<EsqueciSenha/>} />
           <Route path="/chat" element={<Chat/>} />
           <Route path="/perfil" element={<Perfil/>} />
