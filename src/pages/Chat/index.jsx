@@ -20,7 +20,7 @@ export function Chat() {
         <div className='Chat'>
             
     <div className="consertoPesquisa">
-                <BarraDePesquisa/>
+                {/* <BarraDePesquisa/> */}
             </div>
             <section className="main">
                 <div className="mensagens">
