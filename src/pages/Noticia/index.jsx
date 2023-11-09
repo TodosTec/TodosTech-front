@@ -111,7 +111,7 @@ export function Noticia() {
             })
             .catch((error) => {
                 console.log(error.response.status);
-                if (error.response.status == 403) {
+                if (error.response.status == 403 || error.response.status == 429) {
                     setControle(true)
                     setObjectFirstNoticia(newArrayNoticias[0]);
 
