@@ -142,7 +142,6 @@ export function Noticia() {
             <div className="container">
                 <div className="top" style={{ backgroundImage: `url(${objectFirstNoticia.image})` }}>
                     <h1 className="titulo">{objectFirstNoticia.title}</h1>
-                    <p>{objectFirstNoticia.source.name !== null ? objectFirstNoticia.source.name : 'Nome não encontrado'}</p>
                 </div>
                 <div className="noticiasDesc">
                     {controle
@@ -151,7 +150,6 @@ export function Noticia() {
                                 <NoticiaComponente
                                     key={index}
                                     titulo={noticia.title}
-                                    autor={noticia.source.name || 'Nome não encontrado'}
                                     data={new Date(noticia.publishedAt).toLocaleDateString('pt-BR')}
                                     aoClicar={() => {
                                         setUrlNoticiaAtomValue(noticia.url);
@@ -165,7 +163,6 @@ export function Noticia() {
                                 <NoticiaComponente
                                     key={index}
                                     titulo={noticia.title}
-                                    autor={noticia.source.name || 'Nome não encontrado'}
                                     data={new Date(noticia.publishedAt).toLocaleDateString('pt-BR')}
                                     aoClicar={() => {
                                         setUrlNoticiaAtomValue(noticia.url);
