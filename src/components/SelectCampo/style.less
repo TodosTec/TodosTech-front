@@ -1,0 +1,29 @@
+.SelectCampo{
+    background-color: var(--lightBlue);
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    width: 90% !important;
+    max-width: 570px;
+    @media screen and (max-width: 350px) {
+        max-width: 240px;
+        // height: 240px;
+    }
+    p{
+        @media screen and (max-height: 600px) {
+            padding: 4px 0px 4px 10px;
+        }
+        padding: 8px 0px 8px 10px;
+        font-size: .7rem !important;
+        color: var(--mediumBlue);
+    }
+    select{
+        padding: 8px 10px;
+        background-color: inherit;
+        font-size: .7rem !important;
+        max-width: 95%;
+        color:var(--mediumBlue);        
+    }
+
+      
+}

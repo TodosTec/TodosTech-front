@@ -1,0 +1,81 @@
+.RedefinirSenha{
+    background-color: var(--background);
+    height: 100vh;
+    width: 100%;
+    padding-top: 60px;
+    .container{
+        background-color: var(--whiteDiferente);
+        height: 100%;
+        border-radius: 20px 20px 0px 0px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        gap: 20px;
+        padding-top: 10px;
+        .retangulo{
+            width: 15px;
+            height: 3px;
+            background-color: lightgray;
+            border-radius: 100;
+        }
+        .info{
+            display: flex;
+            width: 100%;
+            justify-content: space-between;
+            padding-left: 20px;
+                .invisivel{
+                    // display: cozzz;
+                    width: 1px;
+                    height: 1px;
+                }
+            }
+            form{
+                display: flex;
+                flex-direction: column;
+                gap: 40px;
+                width: 100%;
+                flex-grow: 1;
+                justify-content: space-between;
+                >div{
+                    min-width: 100%;
+                }
+                .inputs{
+                    display: flex;
+                    flex-direction: column;
+                    width: 100%;
+                    align-items: center;
+                    padding: 10px 20px 0px 20px;
+                    gap: 30px;
+                    flex-grow: .4;
+                    justify-content: center;
+                    p{
+                        color: var(--mediumBlue);
+                        font-size: 1.2rem;
+                    }
+                }
+        }
+        .buttons{
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+            flex-grow: .2;
+            flex-direction: row-reverse;
+            .cancelar{
+                width: 30%;
+                button{
+                    background-color: var(--mediumRed);
+                    color: white;
+                    width: 100%;
+                }
+            }
+            button{
+                width: 30%;
+                max-height: 50px;
+            }
+        }
+    }
+    // .sumido{
+    //     display: none;
+    // }
+}

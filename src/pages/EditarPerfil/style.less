@@ -1,0 +1,125 @@
+.EditarPerfil{
+    display: flex;
+    min-height: 100vh;
+    min-width: 100%;
+    padding-top: 50px;
+    background-color: var(--background);
+    position: absolute;
+    z-index: 1;
+    transition: ease .5s;
+    max-height: 100%;
+    max-width: 100%;
+    .container{
+        display: flex;
+        flex-direction: column;
+        background-color: var(--whiteDiferente);
+        min-width: 100%;
+        border-radius: 20px 20px 0px 0px;
+        align-items: center;
+        padding-top: 10px;
+        justify-content: space-around;
+        height: calc(100vh - 50px);
+        .top{
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            align-items: center;
+            justify-content: space-between;
+            flex-grow: .2;
+            .retangulo{
+                width: 15px;
+                height: 3px;
+                background-color: lightgray;
+                border-radius: 100;
+            }
+            .fotoDePerfil{
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                flex-grow: .8;
+                gap: 20px;
+                .foto{
+                    background-image: url('../../assets/62b8395d-4b5c-4efa-ba2f-088d359eb284.png');
+                    background-position: center;
+                    background-size: cover;
+                    background-repeat: no-repeat;
+                    
+                    @media screen and (min-height: 600px) {
+                        width: 65px;
+                        height: 65px;
+                    }
+                    @media screen and (max-height: 600px) {
+                        display: none;
+                    }
+                    @media screen and (min-height: 671px) {
+                        width: 140px;
+                        height: 140px;
+                    }
+                    @media screen and (min-height: 970px) {
+                        width: 240px;
+                        height: 240px;
+                    }
+                }
+                >p{
+                    color: var(--mediumBlue);
+                    font-weight: bold;
+                }
+            }
+        }
+        .infoPerfil{
+            flex-grow: .6;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            min-width: 100%;
+            align-items:center;
+            // padding: 0px 30px;
+            // padding-left: -10px;
+            // margin: 0px 10px;
+            align-items: center;
+            .buttons{
+                display: flex;
+                justify-content: space-between;
+                padding: 0px 10px;
+                gap: 40px;
+                max-width: 100%;
+                flex-direction: row-reverse;
+                .cancelar{
+                    background-color: var(--mediumRed);
+                    border: 2px solid var(--mediumRed);
+                    color: white;
+                }
+                @media screen and (max-width: 350px) {
+                    button{
+                        padding: 10px 20px;
+                        min-width: 50px;
+                    }
+                }
+            }
+        }
+        select{
+            background-color: var(--lightBlue);
+            padding: 8px 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            border-radius: 10px;
+            border: 1px solid var(--mediumBlue); 
+            // min-width: 100%;
+            width: 100%;
+            max-width: 570px;
+            color: var(--mediumBlue);
+        }
+        p{
+            color: var(--mediumBlue);
+            font-size: 1.2rem;
+        }
+        
+    }
+}
+.zindex{
+    z-index: 0;
+}
+.sumido{
+    display: none;
+}

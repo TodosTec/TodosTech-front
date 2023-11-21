@@ -1,0 +1,47 @@
+.Chat{
+    background-color: var(--background);
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 10px;
+    gap: 10px;
+    .consertoPesquisa{
+        display: flex;
+        flex-grow: .7;
+        width: 100%;
+        align-items: center;
+        justify-content: center;
+        img{
+            max-width: 70px;
+            max-height: 70px;
+        }
+    }
+    .main{
+        background-color: var(--whiteDiferente);  
+        min-width: 100%;
+        border-radius: 20px 20px 0px 0px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding-bottom: 70px;
+        @media (min-height: 750px) {
+            flex-grow: 1;
+        }
+        .mensagens{
+        display: flex;
+        flex-direction: column;
+        align-items:center;
+        padding-top: 10px;
+        gap: 30px;
+        .listaContatos{
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            width: 100%;
+        }
+    }
+    }
+}
