@@ -18,7 +18,7 @@ export function AlterarFotoPerfil(){
 
     async function alterarPerfil(e){
         // e.preventDefault()
-            await axios({
+            await axios({ 
                 method: "get",
                 url: `https://api-3wfy.onrender.com/api/todostec/selecionar/username/${usernameAtomValue}`
             })
@@ -135,7 +135,7 @@ export function AlterarFotoPerfil(){
                 </div>
                 {
                     confirme ? (
-                        <p>Aperte em definir denovo para confirmar</p>
+                        <p className='erro'>Aperte em definir de novo para confirmar</p>
                     ) : null
                 }
                 <div className="buttons">
